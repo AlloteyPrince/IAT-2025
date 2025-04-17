@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Complete Your Payment</h1>
+            <p>Fast, secure payment processing</p>
+        </div>
+
+        <div class="amount">$149.99</div>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="credit-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                    <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                </svg> Card
+            </div>
+            <div class="tab" data-tab="bitcoin">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M5.5 13v1.25c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25V13h.5v1.25c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25V13h.084c1.992 0 3.416-1.033 3.416-2.82 0-1.502-1.007-2.323-2.186-2.44v-.088c.97-.242 1.683-.974 1.683-2.19C11.997 3.93 10.847 3 9.092 3H9V1.75a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25V3h-.573V1.75a.25.25 0 0 0-.25-.25H5.75a.25.25 0 0 0-.25.25V3l-1.998.011a.25.25 0 0 0-.25.25v.989c0 .137.11.25.248.25l.755-.005a.75.75 0 0 1 .745.75v5.505a.75.75 0 0 1-.75.75l-.748.011a.25.25 0 0 0-.25.25v1c0 .138.112.25.25.25L5.5 13zm1.427-8.513h1.719c.906 0 1.438.498 1.438 1.312 0 .871-.575 1.362-1.877 1.362h-1.28V4.487zm0 4.051h1.84c1.137 0 1.756.58 1.756 1.524 0 .953-.626 1.45-2.158 1.45H6.927V8.539z"/>
+                </svg> Bitcoin
+            </div>
+            <div class="tab" data-tab="mobile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+                    <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                </svg> Mobile
+            </div>
+        </div>
+
+        <div class="tab-content active" id="credit-card">
+            <div class="form-group">
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+            </div>
+            <div class="form-group">
+                <label for="cardholder">Cardholder Name</label>
+                <input type="text" id="cardholder" placeholder="John Smith">
+            </div>
+            <div class="card-info">
+                <div class="form-group">
+                    <label for="expiry">Expiry Date</label>
+                    <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" placeholder="123" maxlength="3">
+                </div>
+            </div>
+            <div class="card-icons">
+                <svg width="40" height="25" viewBox="0 0 40 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="25" rx="4" fill="#1A1F71"/>
+                    <path d="M15.6 17H13.2L11 8H13.8L15.1 14.2L16.4 8H19.2L15.6 17Z" fill="white"/>
+                    <path d="M19.6 8H22.2L24 17H21.6L21.3 15.5H19.1L18.8 17H16.4L19.6 8ZM21 13.5L20.2 10.1L19.4 13.5H21Z" fill="white"/>
+                    <path d="M24.5 8H27.1L28.7 13.7L30.3 8H32.9L29.3 17H26.9L24.5 8Z" fill="white"/>
+                </svg>
+                <svg width="40" height="25" viewBox="0 0 40 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="25" rx="4" fill="#EB001B" fill-opacity="0.15"/>
+                    <circle cx="15" cy="12.5" r="6" fill="#EB001B"/>
+                    <circle cx="25" cy="12.5" r="6" fill="#F79E1B"/>
+                    <path d="M20 7.5C21.6569 7.5 23 8.84315 23 10.5C23 12.1569 21.6569 13.5 20 13.5C18.3431 13.5 17 12.1569 17 10.5C17 8.84315 18.3431 7.5 20 7.5Z" fill="#FF5F00"/>
+                </svg>
+                <svg width="40" height="25" viewBox="0 0 40 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="40" height="25" rx="4" fill="#016FD0" fill-opacity="0.1"/>
+                    <path d="M8 10H32V15H8V10Z" fill="#016FD0"/>
+                    <path d="M20 6L23 10H17L20 6Z" fill="#016FD0"/>
+                    <path d="M20 19L23 15H17L20 19Z" fill="#016FD0"/>
+                </svg>
+            </div>
+            <button class="btn">Pay Now</button>
+        </div>
+
+        <div class="tab-content" id="bitcoin">
+            <div class="qr-code">
+                <svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="150" height="150" fill="white"/>
+                    <path d="M30 30H40V40H30V30Z" fill="black"/>
+                    <path d="M40 30H50V40H40V30Z" fill="black"/>
+                    <path d="M50 30H60V40H50V30Z" fill="black"/>
+                    <path d="M60 30H70V40H60V30Z" fill="black"/>
+                    <path d="M70 30H80V40H70V30Z" fill="black"/>
+                    <path d="M80 30H90V40H80V30Z" fill="black"/>
+                    <path d="M90 30H100V40H90V30Z" fill="black"/>
+                    <path d="M30 40H40V50H30V40Z" fill="black"/>
+                    <path d="M90 40H100V50H90V40Z" fill="black"/>
+                    <path d="M30 50H40V60H30V50Z" fill="black"/>
+                    <path d="M50 50H60V60H50V50Z" fill="black"/>
+                    <path d="M60 50H70V60H60V50Z" fill="black"/>
+                    <path d="M70 50H80V60H70V50Z" fill="black"/>
+                    <path d="M90 50H100V60H90V50Z" fill="black"/>
+                    <path d="M110 50H120V60H110V50Z" fill="black"/>
+                    <path d="M30 60H40V70H30V60Z" fill="black"/>
+                    <path d="M50 60H60V70H50V60Z" fill="black"/>
+                    <path d="M70 60H80V70H70V60Z" fill="black"/>
+                    <path d="M90 60H100V70H90V60Z" fill="black"/>
+                    <path d="M30 70H40V80H30V70Z" fill="black"/>
+                    <path d="M50 70H60V80H50V70Z" fill="black"/>
+                    <path d="M70 70H80V80H70V70Z" fill="black"/>
+                    <path d="M90 70H100V80H90V70Z" fill="black"/>
+                    <path d="M110 70H120V80H110V70Z" fill="black"/>
+                    <path d="M30 80H40V90H30V80Z" fill="black"/>
+                    <path d="M90 80H100V90H90V80Z" fill="black"/>
+                    <path d="M30 90H40V100H30V90Z" fill="black"/>
+                    <path d="M40 90H50V100H40V90Z" fill="black"/>
+                    <path d="M50 90H60V100H50V90Z" fill="black"/>
+                    <path d="M60 90H70V100H60V90Z" fill="black"/>
+                    <path d="M70 90H80V100H70V90Z" fill="black"/>
+                    <path d="M80 90H90V100H80V90Z" fill="black"/>
+                    <path d="M90 90H100V100H90V90Z" fill="black"/>
+                    <path d="M110 90H120V100H110V90Z" fill="black"/>
+                    <path d="M50 100H60V110H50V100Z" fill="black"/>
+                    <path d="M60 100H70V110H60V100Z" fill="black"/>
+                    <path d="M80 100H90V110H80V100Z" fill="black"/>
+                    <path d="M100 100H110V110H100V100Z" fill="black"/>
+                    <path d="M40 110H50V120H40V110Z" fill="black"/>
+                    <path d="M70 110H80V120H70V110Z" fill="black"/>
+                    <path d="M100 110H110V120H100V110Z" fill="black"/>
+                    <path d="M110 110H120V120H110V110Z" fill="black"/>
+                    <path d="M30 120H40V130H30V120Z" fill="black"/>
+                    <path d="M40 120H50V130H40V120Z" fill="black"/>
+                    <path d="M60 120H70V130H60V120Z" fill="black"/>
+                    <path d="M90 120H100V130H90V120Z" fill="black"/>
+                </svg>
+            </div>
+            <div class="form-group">
+                <p style="text-align: center; margin-bottom: 10px;">Send exactly</p>
+                <div style="text-align: center; font-size: 20px; font-weight: bold; margin-bottom: 15px;">0.00358 BTC</div>
+                <input type="text" value="3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5" readonly style="text-align: center; font-size: 12px;">
+            </div>
+            <button class="btn">I've Sent the Bitcoin</button>
+        </div>
+
+        <div class="tab-content" id="mobile">
+            <div class="mobile-operators">
+                <div class="mobile-operator active">
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 5C9.47715 5 5 9.47715 5 15C5 20.5228 9.47715 25 15 25C20.5228 25 25 20.5228 25 15C25 9.47715 20.5228 5 15 5Z" fill="#E74C3C"/>
+                        <path d="M12 12H18V18H12V12Z" fill="white"/>
+                    </svg>
+                    <div>Operator A</div>
+                </div>
+                <div class="mobile-operator">
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 5H25V25H5V5Z" fill="#3498DB"/>
+                        <path d="M10 10H20V20H10V10Z" fill="white"/>
+                    </svg>
+                    <div>Operator B</div>
+                </div>
+                <div class="mobile-operator">
+                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 25L5 15L15 5L25 15L15 25Z" fill="#2ECC71"/>
+                        <circle cx="15" cy="15" r="5" fill="white"/>
+                    </svg>
+                    <div>Operator C</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" placeholder="+1 (234) 567-890">
+            </div>
+            <div class="form-group">
+                <label for="country">Country</label>
+                <select id="country">
+                    <option>United States</option>
+                    <option>Canada</option>
+                    <option>United Kingdom</option>
+                    <option>Australia</option>
+                    <option>Germany</option>
+                    <option>France</option>
+                    <option>Japan</option>
+                </select>
+            </div>
+            <button class="btn">Continue to Pay</button>
+        </div>
+
+        <div class="security-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+            </svg> 
+            Secure 256-bit SSL encrypted payment
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const tabId = tab.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Mobile operator selection
+        document.querySelectorAll('.mobile-operator').forEach(operator => {
+            operator.addEventListener('click', () => {
+                document.querySelectorAll('.mobile-operator').forEach(o => o.classList.remove('active'));
+                operator.classList.add('active');
+            });
+        });
+
+        // Format credit card number with spaces
+        const cardNumberInput = document.getElementById('card-number');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = '';
+                for (let i = 0; i < value.length; i++) {
+                    if (i > 0 && i % 4 === 0) formattedValue += ' ';
+                    formattedValue += value[i];
+                }
+                e.target.value = formattedValue;
+            });
+        }
+
+        // Format expiry date
+        const expiryInput = document.getElementById('expiry');
+        if (expiryInput) {
+            expiryInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        }
+    </script>
+</body>
+</html>

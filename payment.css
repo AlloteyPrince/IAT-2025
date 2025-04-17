@@ -1,0 +1,225 @@
+/* This CSS file styles a payment page with a modern and clean design. It includes a gradient background, rounded corners, and hover effects for buttons and inputs. The layout is responsive and adapts to different screen sizes. */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url("/api/placeholder/1200/600") center/cover;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 40, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #ffffff, #a7c7e7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .amount {
+            font-size: 40px;
+            font-weight: bold;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .tabs {
+            display: flex;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            background-color: rgba(0, 20, 50, 0.5);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px 0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #a7c7e7;
+            position: relative;
+        }
+
+        .tab.active {
+            background-color: #004e92;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #a7c7e7;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: rgba(0, 20, 50, 0.3);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #004e92;
+            box-shadow: 0 0 0 2px rgba(0, 78, 146, 0.3);
+        }
+
+        .card-info {
+            display: flex;
+            gap: 15px;
+        }
+
+        .card-info > div {
+            flex: 1;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #004e92, #0074d9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(0, 78, 146, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 25px rgba(0, 78, 146, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .security-badge {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+            color: #a7c7e7;
+            font-size: 14px;
+        }
+
+        .security-badge svg {
+            margin-right: 8px;
+        }
+
+        .card-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .mobile-operators {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .mobile-operator {
+            flex: 1;
+            text-align: center;
+            background-color: rgba(0, 20, 50, 0.3);
+            padding: 15px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .mobile-operator:hover, .mobile-operator.active {
+            border-color: #004e92;
+            background-color: rgba(0, 78, 146, 0.2);
+        }
+
+        .mobile-operator svg {
+            height: 30px;
+            margin-bottom: 8px;
+        }
+
+        /* Glowing animation for aesthetic */
+        .container::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 78, 146, 0.1) 0%, transparent 70%);
+            animation: rotate 15s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
