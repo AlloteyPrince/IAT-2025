@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login | IAT</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      max-width: 400px;
+      margin: auto;
+      text-align: center;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #loading {
+      display: none;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <h2>Login to Your Account</h2>
+
+  <form id="login-form">
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <input type="password" id="password" placeholder="Enter your password" required />
+    <button type="submit">Login</button>
+  </form>
+
+  <p id="loading">Logging in...</p>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const loading = document.getElementById('loading');
+
+      loading.style.display = 'block';
+
+      try {
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+        loading.style.display = 'none';
+
+        if (response.ok) {
+          alert(data.message || 'Login successful');
+          
+          // Optionally store token or user info here:
+          // sessionStorage.setItem('token', data.token);
+
+          window.location.href = 'success.html';
+        } else {
+          alert(data.message || 'Login failed. Please check your credentials.');
+        }
+      } catch (err) {
+        loading.style.display = 'none';
+        console.error(err);
+        alert('Something went wrong. Please try again.');
+      }
+    });
+  </script>
+</body>
+</html>
