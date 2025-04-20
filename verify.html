@@ -1,152 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Verify Email | IAT</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      max-width: 400px;
-      margin: auto;
-      text-align: center;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Verify Email | IAT</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        max-width: 400px;
+        margin: auto;
+        text-align: center;
+      }
 
-    input, button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      font-size: 16px;
-    }
+      input,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        font-size: 16px;
+      }
 
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
 
-    #loading, #countdown {
-      color: #666;
-      font-size: 14px;
-      margin-top: 10px;
-    }
+      #loading,
+      #countdown {
+        color: #666;
+        font-size: 14px;
+        margin-top: 10px;
+      }
 
-    #resend-btn:disabled {
-      background-color: #aaa;
-      cursor: not-allowed;
-    }
-  </style>
-</head>
-<body>
-  <h2>Verify Your Email</h2>
-  <p>We sent a verification code to your email. Please enter it below.</p>
+      #resend-btn:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Verify Your Email</h2>
+    <p>We sent a verification code to your email. Please enter it below.</p>
 
-  <form id="verify-form">
-    <input type="text" id="otp" placeholder="Enter OTP" required />
-    <input type="email" id="email" disabled />
-    <button type="submit">Verify</button>
-  </form>
+    <form id="verify-form">
+      <input type="text" id="otp" placeholder="Enter OTP" required />
+      <input type="email" id="email" disabled />
+      <button type="submit">Verify</button>
+    </form>
 
-  <button id="resend-btn" disabled>Resend OTP</button>
-  <p id="countdown"></p>
-  <p id="loading">Verifying...</p>
+    <button id="resend-btn" disabled>Resend OTP</button>
+    <p id="countdown"></p>
+    <p id="loading">Verifying...</p>
 
-  <script>
-    const emailInput = document.getElementById('email');
-    const storedEmail = sessionStorage.getItem('user_email');
-    const countdown = document.getElementById('countdown');
-    const resendBtn = document.getElementById('resend-btn');
+    <script>
+      const emailInput = document.getElementById("email");
+      const storedEmail = sessionStorage.getItem("user_email");
+      const countdown = document.getElementById("countdown");
+      const resendBtn = document.getElementById("resend-btn");
 
-    const RESEND_COOLDOWN = 60; // seconds
-    let timeLeft = RESEND_COOLDOWN;
+      const RESEND_COOLDOWN = 60; // seconds
+      let timeLeft = RESEND_COOLDOWN;
 
-    // Show email
-    if (!storedEmail) {
-      alert("No email found. Please sign up again.");
-      window.location.href = 'signup.html';
-    } else {
-      emailInput.value = storedEmail;
-    }
+      // Show email
+      if (!storedEmail) {
+        alert("No email found. Please sign up again.");
+        window.location.href = "signup.html";
+      } else {
+        emailInput.value = storedEmail;
+      }
 
-    // Start countdown timer
-    const startCountdown = () => {
-      resendBtn.disabled = true;
-      countdown.textContent = `You can resend OTP in ${timeLeft} seconds`;
-
-      const timer = setInterval(() => {
-        timeLeft--;
+      // Start countdown timer
+      const startCountdown = () => {
+        resendBtn.disabled = true;
         countdown.textContent = `You can resend OTP in ${timeLeft} seconds`;
 
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          resendBtn.disabled = false;
-          countdown.textContent = "You can now resend the OTP.";
-        }
-      }, 1000);
-    };
+        const timer = setInterval(() => {
+          timeLeft--;
+          countdown.textContent = `You can resend OTP in ${timeLeft} seconds`;
 
-    // Resend OTP function
-    resendBtn.addEventListener('click', async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/auth/resend', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: storedEmail }),
-        });
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            resendBtn.disabled = false;
+            countdown.textContent = "You can now resend the OTP.";
+          }
+        }, 1000);
+      };
 
-        const data = await response.json();
-        alert(data.message);
+      // Resend OTP function
+      resendBtn.addEventListener("click", async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:5000/api/auth/resend",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email: storedEmail }),
+            }
+          );
 
-        if (response.ok) {
-          timeLeft = RESEND_COOLDOWN;
-          startCountdown();
-        }
-      } catch (err) {
-        console.error(err);
-        alert('Could not resend OTP. Please try again later.');
-      }
-    });
-
-    // Verification form submit
-    document.getElementById('verify-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const otp = document.getElementById('otp').value.trim();
-      const loading = document.getElementById('loading');
-
-      if (!otp) {
-        alert("Please enter the OTP.");
-        return;
-      }
-
-      loading.style.display = 'block';
-
-      try {
-        const response = await fetch('http://localhost:5000/api/auth/verify', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ otp, email: storedEmail }),
-        });
-
-        const data = await response.json();
-        loading.style.display = 'none';
-
-        if (response.ok) {
+          const data = await response.json();
           alert(data.message);
-          window.location.href = 'login.html';
-        } else {
-          alert(data.message || 'Verification failed. Please try again.');
-        }
-      } catch (err) {
-        loading.style.display = 'none';
-        console.error(err);
-        alert('Something went wrong. Please try again.');
-      }
-    });
 
-    // Initialize countdown on page load
-    startCountdown();
-  </script>
-</body>
+          if (response.ok) {
+            timeLeft = RESEND_COOLDOWN;
+            startCountdown();
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Could not resend OTP. Please try again later.");
+        }
+      });
+
+      // Verification form submit
+      document
+        .getElementById("verify-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const otp = document.getElementById("otp").value.trim();
+          const loading = document.getElementById("loading");
+
+          if (!otp) {
+            alert("Please enter the OTP.");
+            return;
+          }
+
+          loading.style.display = "block";
+
+          try {
+            const response = await fetch(
+              "http://localhost:5000/api/auth/verify",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ otp, email: storedEmail }),
+              }
+            );
+
+            const data = await response.json();
+            loading.style.display = "none";
+
+            if (response.ok) {
+              alert(data.message);
+              window.location.href = "login.html";
+            } else {
+              alert(data.message || "Verification failed. Please try again.");
+            }
+          } catch (err) {
+            loading.style.display = "none";
+            console.error(err);
+            alert("Something went wrong. Please try again.");
+          }
+        });
+
+      // Initialize countdown on page load
+      startCountdown();
+    </script>
+  </body>
 </html>

@@ -1,43 +1,52 @@
 <!-- signup.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Sign Up | IAT</title>
-</head>
-<body>
-  <h2>Create Account</h2>
-  <form id="signup-form">
-    <input type="email" id="email" placeholder="Enter your email" required />
-    <input type="password" id="password" placeholder="Enter password" required />
-    <button type="submit">Sign Up</button>
-  </form>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sign Up | IAT</title>
+  </head>
+  <body>
+    <h2>Create Account</h2>
+    <form id="signup-form">
+      <input type="email" id="email" placeholder="Enter your email" required />
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter password"
+        required
+      />
+      <button type="submit">Sign Up</button>
+    </form>
 
-  <script>
-    document.getElementById('signup-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+    <script>
+      document
+        .getElementById("signup-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
 
-      const data = await response.json();
-      alert(data.message);
+          const response = await fetch(
+            "http://localhost:5000/api/auth/signup",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ email, password }),
+            }
+          );
 
-      if (response.ok) {
-        // Store email in sessionStorage for use in verify.html
-        sessionStorage.setItem('user_email', email);
+          const data = await response.json();
+          alert(data.message);
 
-        // Redirect to verification page
-        window.location.href = 'verify.html';
-      }
-    });
-  </script>
-</body>
+          if (response.ok) {
+            // Store email in sessionStorage for use in verify.html
+            sessionStorage.setItem("user_email", email);
+
+            // Redirect to verification page
+            window.location.href = "verify.html";
+          }
+        });
+    </script>
+  </body>
 </html>
-
