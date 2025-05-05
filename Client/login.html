@@ -53,48 +53,33 @@
 
 
     <script>
-      document
-        .getElementById("login-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-
-          const email = document.getElementById("email").value.trim();
-          const password = document.getElementById("password").value;
-          const loading = document.getElementById("loading");
-
-          loading.style.display = "block";
-
-          try {
-            const response = await fetch(
-              "http://localhost:5000/api/auth/login",
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
-              }
-            );
-
-            const data = await response.json();
-            loading.style.display = "none";
-
-            if (response.ok) {
-              alert(data.message || "Login successful");
-
-              // Optionally store token or user info here:
-              // sessionStorage.setItem('token', data.token);
-
-              window.location.href = "success.html";
-            } else {
-              alert(
-                data.message || "Login failed. Please check your credentials."
-              );
-            }
-          } catch (err) {
-            loading.style.display = "none";
-            console.error(err);
-            alert("Something went wrong. Please try again.");
-          }
-        });
+     document.getElementById("login-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const loading = document.getElementById("loading");
+  loading.style.display = "block";
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const data = await response.json();
+    loading.style.display = "none";
+    if (response.ok) {
+      // Store token in sessionStorage
+      sessionStorage.setItem('token', data.token);
+      window.location.href = "success.html";
+    } else {
+      alert(data.message || "Login failed. Please check your credentials.");
+    }
+  } catch (err) {
+    loading.style.display = "none";
+    console.error(err);
+    alert("Something went wrong. Please try again.");
+  }
+});
     </script>
   </body>
 </html>
